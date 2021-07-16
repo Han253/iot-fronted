@@ -1,0 +1,32 @@
+<div class="container-fluid div-devices">
+    <div class="content-devices">
+        <div class="row">
+            <div class="col-10">
+                <h2 class="bd-title">Devices</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Create</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let device of devices">
+                <th>2020-05-22 15:45:00</th>
+                <td>{{ device.tag}}</td>
+                <td>{{ device.name}}</td>
+                <td>
+                    <a class="text-muted" href=""><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+                    <a class="text-muted" href=""><i class="fas fa-trash-alt"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>    
+</div>

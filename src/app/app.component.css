@@ -1,0 +1,21 @@
+.content-div{
+    margin:0px;
+    padding:0px;
+}
+
+.navbar-inside{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.sidebar-div-style{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.sidebar-style{
+    height: 100vh;
+    display: flex!important;
+    flex-shrink: 0!important;
+    flex-direction: column!important;
+}
