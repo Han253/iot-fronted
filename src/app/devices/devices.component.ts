@@ -7,16 +7,10 @@ import { DeviceService } from '../services/device.service';
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.css']
 })
-export class DevicesComponent implements OnInit {
+export class DevicesComponent implements OnInit {  
 
-  devices: Array<Device> = new Array<Device>();
+  constructor() {}
 
-  constructor(private DispositivoInyectado: DeviceService) { }
-
-  ngOnInit(): void {
-    this.DispositivoInyectado.getDevices().subscribe((devicesResponse)=>{
-      this.devices = devicesResponse;
-    });
-  }
+  ngOnInit(): void {}
 
 }

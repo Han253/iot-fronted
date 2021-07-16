@@ -1,0 +1,23 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Create</th>
+        <th scope="col">Tag</th>
+        <th scope="col">Name</th>
+        <th scope="col">Is Gateway</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let device of devices">
+        <td>{{ device.created_at | date:'medium' }}</td>
+        <td>{{ device.tag}}</td>        
+        <td>{{ device.name}}</td>
+        <td>{{ device.is_gateway }}</td>
+        <td>
+            <a class="text-muted" (click)="passDevice(device)"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+            <a class="text-danger" (click)="delete(device.tag)"><i class="fas fa-trash-alt"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>

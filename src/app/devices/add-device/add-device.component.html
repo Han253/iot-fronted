@@ -1,0 +1,22 @@
+<div class="new-device">
+    <form class="form" [formGroup]="deviceForm">
+        <div class="form-group">
+            <label for="tag">Tag:</label>
+            <input id="tag" type="text" class="form-control" formControlName="tag">
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" class="form-control" formControlName="name">
+        </div>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="is_gateway" formControlName="is_gateway">
+            <label class="form-check-label" for="is_gateway">Is Gateway</label>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success" [disabled]="!deviceForm.valid" (click)="add_device()">Enviar</button>&nbsp;
+        <a class="btn btn-danger" routerLink="/devices">Cancelar</a>
+    </form>
+    <br>
+    
+</div>

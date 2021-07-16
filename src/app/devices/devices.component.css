@@ -1,8 +1,17 @@
+.div-buttons{
+    margin: auto;
+    text-align: center;
+}
+
+
+
 .div-devices{
     background: #F6F6F6;
     padding-top:2vh;
     height: 100vh;
 }
+
+
 
 .content-devices{
     height: 96vh;
