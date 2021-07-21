@@ -28,6 +28,10 @@ export class DeviceService {
     return this.http.post<Device>(BASE_URL+'/device',device)
   }
 
+  updateDevice(device: Device){
+    return this.http.put<Device>(BASE_URL+'/device/tag/'+device.tag, device)
+  }
+
   deleteDevice(tag: string): Observable<any>{
     return this.http.delete<any>(BASE_URL+'/device/tag/'+tag)
   }

@@ -4,6 +4,7 @@ import { AddDeviceComponent } from './devices/add-device/add-device.component';
 import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
 import { DevicesComponent } from './devices/devices.component';
 import { ListDeviceComponent } from './devices/list-device/list-device.component';
+import { UpdateDeviceComponent } from './devices/update-device/update-device.component';
 import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     path: 'devices', component:DevicesComponent, children: [
       {path:'', component:ListDeviceComponent},
       {path:'new', component:AddDeviceComponent},
-      {path:'detail',component:DeviceDetailComponent}
+      {path:'detail',component:DeviceDetailComponent},
+      {path:'update/:tag',component:UpdateDeviceComponent}
     ]
   }
 ];

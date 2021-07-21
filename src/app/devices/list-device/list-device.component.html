@@ -16,6 +16,7 @@
         <td>{{ device.is_gateway }}</td>
         <td>
             <a class="text-muted" (click)="passDevice(device)"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+            <a class="text-muted" (click)="update(device)"><i class="fas fa-redo-alt"></i></a>&nbsp;&nbsp;
             <a class="text-danger" (click)="delete(device.tag)"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>

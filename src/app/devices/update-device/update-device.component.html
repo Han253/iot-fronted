@@ -1,0 +1,49 @@
+<div class="new-device">
+    <form class="form" [formGroup]="deviceForm">
+        <p>Device properties:</p>
+        <div class="row">
+            <div class="input-group input-group-sm mb-3 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="tag-label">Tag</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="tag" formControlName="tag">
+            </div>
+            <div class="input-group input-group-sm mb-3 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="name-label">Name</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name" formControlName="name">
+            </div>
+            <div class="col">
+                <input class="form-check-input" type="checkbox" value="" id="is_gateway" formControlName="is_gateway">&nbsp;&nbsp;
+                <label class="form-check-label" for="is_gateway">Is Gateway</label>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="input-group input-group-sm mb-3 col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="ipv4_address-label">IPv4 Address</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="ipv4_address" formControlName="ipv4_address">
+            </div>
+            <div class="input-group mb-3 col">
+                <label class="input-group-text" for="device_parent">Parent</label>
+                <select class="form-select" id="device_parent" formControlName="device_parent">
+                  <option value="0">None</option>
+                  <option value="5">A001</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-text">Description</span>
+                <textarea class="form-control" aria-label="With textarea" id="description" formControlName="description"></textarea>
+              </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success" [disabled]="!deviceForm.valid" (click)="update_device()">Update</button>&nbsp;
+        <a class="btn btn-danger" routerLink="/devices">Cancel</a>
+    </form>
+    <br>
+    
+</div>

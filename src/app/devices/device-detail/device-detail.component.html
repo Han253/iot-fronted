@@ -5,6 +5,25 @@
         <li>Name: {{ device.name }}</li>
         <li>Tag: {{ device.tag }}</li>
         <li>Is Gateway: {{ device.is_gateway }}</li>
+        <li>Description: {{ device.description }}</li>
+        <li>Ipv4: {{ device.ipv4_address }}</li>
+        <li>Device Parent: {{ device.device_parent }}</li>
+        <li>Created at: {{ device.created_at | date:'medium' }}</li>
+        <li>Update at: {{ device.update_at | date:'medium' }}</li>
+        <li><b>Properties:</b> 
+            <ul *ngFor="let propertie of device.properties_list">
+                <li>Name: {{ propertie.name }}</li>
+                <li>Value: {{ propertie.value }}</li>
+                <li>Description: {{ propertie.description }}</li>
+              </ul>
+        </li>
+        <li><b>Resources:</b> 
+            <ul *ngFor="let resource of device.resources_list">
+                <li>Tag: {{ resource.tag }}</li>
+                <li>Name: {{ resource.name }}</li>
+                <li>Type: {{ resource.resource_type }}</li>
+              </ul>
+        </li>
     </ul>
     
 </div>
