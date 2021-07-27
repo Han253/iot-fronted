@@ -21,7 +21,7 @@ import { UpdateDeviceComponent } from './devices/update-device/update-device.com
     AddDeviceComponent,
     ListDeviceComponent,
     DeviceDetailComponent,
-    UpdateDeviceComponent
+    UpdateDeviceComponent,
   ],
   imports: [
     BrowserModule,

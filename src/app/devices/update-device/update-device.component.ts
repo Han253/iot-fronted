@@ -42,7 +42,7 @@ export class UpdateDeviceComponent implements OnInit {
   update_device(){
     this.device = this.deviceForm.value as Device;
     this.DispositivoInyectado.updateDevice(this.device).subscribe((deviceRecived)=>{
-      this.route.navigate(['/devices/detail', {device: JSON.stringify(deviceRecived)}])
+      this.route.navigate(['/devices'])
     })
   }
 

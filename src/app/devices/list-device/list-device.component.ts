@@ -21,7 +21,8 @@ export class ListDeviceComponent implements OnInit {
   }
 
   passDevice(deviceRecived:Device){
-    this.route.navigate(['/devices/detail', {device: JSON.stringify(deviceRecived)}])  
+    this.DispositivoInyectado.device = deviceRecived;
+    this.route.navigate(['/devices/detail/'+deviceRecived.tag])
   }
   
   update(device:Device){

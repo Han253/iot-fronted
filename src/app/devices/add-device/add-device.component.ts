@@ -23,14 +23,17 @@ export class AddDeviceComponent implements OnInit {
     this.deviceForm = this.fbGenerator.group({
         tag:['',Validators.required],
         name:['',Validators.required],
-        is_gateway:[false]
+        is_gateway:[false],
+        ipv4_address:[''],
+        device_parent:[0],
+        description:['']
     })
   }
 
   add_device(){
     this.device = this.deviceForm.value as Device;
     this.DispositivoInyectado.addDevice(this.device).subscribe((deviceRecived)=>{
-      this.route.navigate(['/devices/detail', {device: JSON.stringify(deviceRecived)}])
+      this.route.navigate(['/devices'])
     })
   }
 

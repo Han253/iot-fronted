@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'devices', component:DevicesComponent, children: [
       {path:'', component:ListDeviceComponent},
       {path:'new', component:AddDeviceComponent},
-      {path:'detail',component:DeviceDetailComponent},
+      {path:'detail/:tag',component:DeviceDetailComponent},
       {path:'update/:tag',component:UpdateDeviceComponent}
     ]
   }

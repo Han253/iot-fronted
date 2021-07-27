@@ -1,29 +1,198 @@
 <div class="device-detail-div">
     <h3>{{ device.name }}&nbsp;&nbsp;<a class=".text-success" routerLink="/devices"><i class="fas fa-times"></i></a></h3>
-    <p>Details</p>
-    <ul>
-        <li>Name: {{ device.name }}</li>
-        <li>Tag: {{ device.tag }}</li>
-        <li>Is Gateway: {{ device.is_gateway }}</li>
-        <li>Description: {{ device.description }}</li>
-        <li>Ipv4: {{ device.ipv4_address }}</li>
-        <li>Device Parent: {{ device.device_parent }}</li>
-        <li>Created at: {{ device.created_at | date:'medium' }}</li>
-        <li>Update at: {{ device.update_at | date:'medium' }}</li>
-        <li><b>Properties:</b> 
-            <ul *ngFor="let propertie of device.properties_list">
-                <li>Name: {{ propertie.name }}</li>
-                <li>Value: {{ propertie.value }}</li>
-                <li>Description: {{ propertie.description }}</li>
-              </ul>
+    <br>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab" aria-controls="resume" aria-selected="true">Description</button>
         </li>
-        <li><b>Resources:</b> 
-            <ul *ngFor="let resource of device.resources_list">
-                <li>Tag: {{ resource.tag }}</li>
-                <li>Name: {{ resource.name }}</li>
-                <li>Type: {{ resource.resource_type }}</li>
-              </ul>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties" type="button" role="tab" aria-controls="properties" aria-selected="false">Properties</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="resource-tab" data-bs-toggle="tab" data-bs-target="#resource" type="button" role="tab" aria-controls="resource" aria-selected="false">Resources</button>
         </li>
     </ul>
     
+
+    <!-- Property Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Property</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Add new property to device</p>
+            <form class="form" [formGroup]="propertieForm">
+              <div class="row">
+                  <div class="input-group input-group-sm mb-3 col">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="name-label">Name</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name" formControlName="name">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-group input-group-sm mb-3 col">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="value-label">Value</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="value" formControlName="value">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-group col">
+                      <span class="input-group-text">Description</span>
+                      <textarea class="form-control" aria-label="With textarea" id="description" formControlName="description"></textarea>
+                    </div>
+              </div>
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" [disabled]="!propertieForm.valid" (click)="addPropertie()" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Property Modal-->
+    <!-- Resource Modal -->
+    <div class="modal fade" id="resourceModal" tabindex="-1" aria-labelledby="resourceModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="resourceModalLabel">Add Resource</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Add new resource to device</p>
+            <form class="form" [formGroup]="resourceForm">
+              <div class="row">
+                <div class="input-group input-group-sm mb-3 col">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="tag-label">Tag</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="tag" formControlName="tag">
+                </div>
+              </div>
+              <div class="row">
+                  <div class="input-group input-group-sm mb-3 col">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="name-label">Name</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name" formControlName="name">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-group mb-3 col">
+                    <label class="input-group-text" for="resource_type">Type</label>
+                    <select class="form-select" id="resource_type" formControlName="resource_type">
+                      <option value="SENSOR">SENSOR</option>
+                      <option value="ACTUATOR">ACTUATOR</option>
+                    </select>
+                </div>
+                <div class="row">
+                  <div class="input-group col">
+                      <span class="input-group-text">Description</span>
+                      <textarea class="form-control" aria-label="With textarea" id="description" formControlName="description"></textarea>
+                    </div>
+              </div>
+              </div>
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" [disabled]="!resourceForm.valid" (click)="addResource()" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Resorces Modal-->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="resume" role="tabpanel" aria-labelledby="resume-tab">
+            <div class="content-device">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>TAG: </b>{{ device.tag }}</td>
+                            <td><b>Name: </b>{{ device.name }}</td>
+                            <td><b>Is Gateway: </b>{{ device.is_gateway }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>IPv4: </b>{{ device.ipv4_address }}</td>
+                            <td><b>Device Parent: </b>{{ device.device_parent }}</td>
+                            <td><b>Create At: </b>{{ device.created_at | date:'medium'}}</td>
+                            <td><b>Update At: </b>{{ device.update_at | date:'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><b>Description:</b> {{ device.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+            <div class="content-device">
+                <h3>Properties</h3>
+                <p>Device Properties</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add
+                </button>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let propertie of device.properties_list">
+                        <td>{{ propertie.name }}</td>
+                        <td>{{ propertie.value }}</td>
+                        <td>{{ propertie.description }}</td>
+                        <td>
+                          <a class="text-danger" (click)="deletePropertie(propertie)"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="resource" role="tabpanel" aria-labelledby="resource-tab">
+            <div class="content-device">
+                <h3>Resources</h3>
+                <p>Devices Resources</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#resourceModal">
+                  Add
+                </button>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">TAG</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let resource of device.resources_list">
+                        <td>{{ resource.tag }}</td>
+                        <td>{{ resource.name }}</td>
+                        <td>{{ resource.resource_type }}</td>
+                        <td>
+                          <a class="text-muted"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+                          <a class="text-danger" (click)="deleteResource(resource)"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>  
 </div>

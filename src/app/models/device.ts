@@ -2,6 +2,7 @@ import { Propertie } from "./propertie";
 import { Resource } from "./resources";
 
 export class Device{
+    id: number;
     tag: string;
     name: string;
     description: string;
@@ -14,6 +15,7 @@ export class Device{
     resources_list:Array<Resource>;
 
     constructor(){
+        this.id = 0;
         this.tag = '';
         this.name = '';
         this.description = '';
