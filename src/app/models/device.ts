@@ -1,4 +1,4 @@
-import { Propertie } from "./propertie";
+import { Property } from "./property";
 import { Resource } from "./resources";
 
 export class Device{
@@ -11,7 +11,7 @@ export class Device{
     created_at: string;
     update_at: string;
     device_parent: number;
-    properties_list:Array<Propertie>;
+    properties_list:Array<Property>;
     resources_list:Array<Resource>;
 
     constructor(){

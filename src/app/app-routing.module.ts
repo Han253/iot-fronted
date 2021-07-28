@@ -6,6 +6,7 @@ import { DevicesComponent } from './devices/devices.component';
 import { ListDeviceComponent } from './devices/list-device/list-device.component';
 import { UpdateDeviceComponent } from './devices/update-device/update-device.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { ResourcesComponent } from './resources/resources.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,9 @@ const routes: Routes = [
       {path:'detail/:tag',component:DeviceDetailComponent},
       {path:'update/:tag',component:UpdateDeviceComponent}
     ]
+  },
+  {
+    path: 'resource/:tagdevice/:tagresource',component:ResourcesComponent
   }
 ];
 

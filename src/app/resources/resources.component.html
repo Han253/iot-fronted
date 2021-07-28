@@ -1,0 +1,119 @@
+<div class="container-fluid div-resource">
+    <div class="content-resource">
+        <div class="row">
+            <div class="col-10">
+                <h2 class="bd-title">Resource</h2>
+            </div>
+            <div class="div-buttons col" >
+                <a class="text-muted" (click)="backDevice()"><i class="fas fa-backward fa-lg"></i></a>          
+            </div>
+        </div>
+        <hr>
+        <!-- Property Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resourceModalLabel" *ngIf="updateProp == false">Add Property</h5>
+                    <h5 class="modal-title" id="resourceModalLabel" *ngIf="updateProp == true">Update Property</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p *ngIf="updateProp == false">Add new property to resource</p>
+                    <p *ngIf="updateProp == true">update property</p>
+                <form class="form" [formGroup]="propertyForm">
+                    <div class="row">
+                        <div class="input-group input-group-sm mb-3 col">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="name-label">Name</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name" formControlName="name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group input-group-sm mb-3 col">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="value-label">Value</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="value" formControlName="value">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group col">
+                            <span class="input-group-text">Description</span>
+                            <textarea class="form-control" aria-label="With textarea" id="description" formControlName="description"></textarea>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" [disabled]="!propertyForm.valid" data-bs-dismiss="modal" (click)="addProperty()">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <br>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab" aria-controls="resume" aria-selected="true">Description</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties" type="button" role="tab" aria-controls="properties" aria-selected="false">Properties</button>
+            </li>
+        </ul>
+        <br>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="resume" role="tabpanel" aria-labelledby="resume-tab">
+                <div class="content-device">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><b>TAG: </b>{{ resource.tag }}</td>
+                                <td><b>Name: </b>{{ resource.name }}</td>
+                                <td><b>Type: </b>{{ resource.resource_type }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><b>Description:</b> {{ resource.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+                <div class="content-device">
+                    <h3>Properties</h3>
+                    <p>Device Properties</p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Add
+                    </button>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Options</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let property of resource.properties_list">
+                            <td>{{ property.name }}</td>
+                            <td>{{ property.value }}</td>
+                            <td>{{ property.description }}</td>
+                            <td>
+                              <a class="text-muted" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="updatePropertyModal(property)"><i class="fas fa-redo-alt" ></i></a>&nbsp;&nbsp;  
+                              <a class="text-danger" (click)="deleteProperty(property)"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
+        </div> 
+
+    </div>    
+</div>
+

@@ -1,5 +1,10 @@
+.div-buttons{
+    margin: auto;
+    text-align: center;
+}
 
-.div-dashboard{
+
+.div-resource{
     background: #F6F6F6;
     padding-top:2vh;
     height: 100vh;
@@ -7,7 +12,7 @@
 
 
 
-.content-dashboard{
+.content-resource{
     height: 96vh;
     background: #fff;
     border: 1px solid;

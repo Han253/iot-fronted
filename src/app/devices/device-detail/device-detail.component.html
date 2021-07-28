@@ -19,12 +19,14 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Property</h5>
+            <h5 class="modal-title" id="exampleModalLabel" *ngIf="updateProp == false">Add Property</h5>
+            <h5 class="modal-title" id="exampleModalLabel" *ngIf="updateProp == true">Update Property</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Add new property to device</p>
-            <form class="form" [formGroup]="propertieForm">
+            <p *ngIf="updateProp == false">Add new property to device</p>
+            <p *ngIf="updateProp == true">update property</p>
+            <form class="form" [formGroup]="propertyForm">
               <div class="row">
                   <div class="input-group input-group-sm mb-3 col">
                       <div class="input-group-prepend">
@@ -51,7 +53,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" [disabled]="!propertieForm.valid" (click)="addPropertie()" data-bs-dismiss="modal">Save changes</button>
+            <button type="button" class="btn btn-success" [disabled]="!propertyForm.valid" (click)="addProperty()" data-bs-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -62,11 +64,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="resourceModalLabel">Add Resource</h5>
+            <h5 class="modal-title" id="resourceModalLabel" *ngIf="updateReso == false">Add Resource</h5>
+            <h5 class="modal-title" id="resourceModalLabel" *ngIf="updateReso == true">Update Resource</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Add new resource to device</p>
+            <p *ngIf="updateReso == false">Add new resource to device</p>
+            <p *ngIf="updateReso == true">update resource</p>
             <form class="form" [formGroup]="resourceForm">
               <div class="row">
                 <div class="input-group input-group-sm mb-3 col">
@@ -138,7 +142,7 @@
                 <h3>Properties</h3>
                 <p>Device Properties</p>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addPropertyModal()">
                   Add
                 </button>
                 <table class="table">
@@ -151,12 +155,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let propertie of device.properties_list">
-                        <td>{{ propertie.name }}</td>
-                        <td>{{ propertie.value }}</td>
-                        <td>{{ propertie.description }}</td>
+                      <tr *ngFor="let property of device.properties_list">
+                        <td>{{ property.name }}</td>
+                        <td>{{ property.value }}</td>
+                        <td>{{ property.description }}</td>
                         <td>
-                          <a class="text-danger" (click)="deletePropertie(propertie)"><i class="fas fa-trash-alt"></i></a>
+                          <a class="text-muted" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="updatePropertyModal(property)"><i class="fas fa-redo-alt" ></i></a>&nbsp;&nbsp;
+                          <a class="text-danger" (click)="deleteProperty(property)"><i class="fas fa-trash-alt"></i></a>
                         </td>
                       </tr>
                     </tbody>
@@ -168,7 +173,7 @@
                 <h3>Resources</h3>
                 <p>Devices Resources</p>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#resourceModal">
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#resourceModal" (click)="addResourceModal()">
                   Add
                 </button>
                 <table class="table">
@@ -186,7 +191,8 @@
                         <td>{{ resource.name }}</td>
                         <td>{{ resource.resource_type }}</td>
                         <td>
-                          <a class="text-muted"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+                          <a class="text-muted"  (click)="passResource(resource)"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
+                          <a class="text-muted" data-bs-toggle="modal" data-bs-target="#resourceModal" (click)="updateResourceModal(resource)"><i class="fas fa-redo-alt"></i></a>&nbsp;&nbsp;
                           <a class="text-danger" (click)="deleteResource(resource)"><i class="fas fa-trash-alt"></i></a>
                         </td>
                       </tr>
