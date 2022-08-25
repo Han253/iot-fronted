@@ -11,20 +11,23 @@ import { DeviceService } from 'src/app/services/device.service';
 })
 export class AddDeviceComponent implements OnInit {
 
+  //Formulario para datos del nuevo dispositivo
   deviceForm: FormGroup;
-
+  //dispositivo que será enviado al backend
   device:Device = new Device();
+  //listado de dispositivos padres
 
 
   constructor(private fbGenerator: FormBuilder, private DispositivoInyectado: DeviceService, private route: Router) {
   }
 
   ngOnInit(): void {
+
+
+
     this.deviceForm = this.fbGenerator.group({
-        tag:['',Validators.required],
         name:['',Validators.required],
         is_gateway:[false],
-        ipv4_address:[''],
         device_parent:[0],
         description:['']
     })

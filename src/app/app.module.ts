@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
 import { UpdateDeviceComponent } from './devices/update-device/update-device.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ResourcesComponent } from './resources/resources.component';
     DeviceDetailComponent,
     UpdateDeviceComponent,
     ResourcesComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

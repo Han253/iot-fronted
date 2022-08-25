@@ -7,7 +7,7 @@ import { Resource } from '../models/resources';
 
 
 
-const BASE_URL: string = 'http://192.168.0.125:8090';
+const BASE_URL: string = 'http://localhost:8090';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,8 @@ export class DeviceService {
     return this.http.get<Device[]>(BASE_URL+'/device')
   }
 
-  getDevice(tag:string): Observable<Device>{
-    return this.http.get<Device>(BASE_URL+'/device/tag/'+tag)
+  getDevice(id:number): Observable<Device>{
+    return this.http.get<Device>(BASE_URL+'/device/'+id)
   }
 
   addDevice(device: Device): Observable<Device>{
@@ -35,11 +35,11 @@ export class DeviceService {
   }
 
   updateDevice(device: Device){
-    return this.http.put<Device>(BASE_URL+'/device/tag/'+device.tag, device)
+    return this.http.put<Device>(BASE_URL+'/device/'+device.id, device)
   }
 
-  deleteDevice(tag: string): Observable<any>{
-    return this.http.delete<any>(BASE_URL+'/device/tag/'+tag)
+  deleteDevice(id: number): Observable<any>{
+    return this.http.delete<any>(BASE_URL+'/device/'+id)
   }
 
   addProperty(property:Property): Observable<Property>{

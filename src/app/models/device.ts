@@ -3,28 +3,25 @@ import { Resource } from "./resources";
 
 export class Device{
     id: number;
-    tag: string;
     name: string;
     description: string;
-    ipv4_address: string;
-    is_gateway:boolean;
+    gateway:boolean;
     created_at: string;
     update_at: string;
     device_parent: number;
-    properties_list:Array<Property>;
-    resources_list:Array<Resource>;
+    environment: number;
+    properties:Array<Property>;
+    resources:Array<Resource>;
 
     constructor(){
         this.id = 0;
-        this.tag = '';
         this.name = '';
         this.description = '';
-        this.ipv4_address = '';
-        this.is_gateway = false;
+        this.gateway = false;
         this.created_at='';
         this.update_at = '';
         this.device_parent=0;
-        this.properties_list = [];
-        this.resources_list = [];
+        this.properties = [];
+        this.resources = [];
     }
 }

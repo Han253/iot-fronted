@@ -119,13 +119,13 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><b>TAG: </b>{{ device.tag }}</td>
                             <td><b>Name: </b>{{ device.name }}</td>
-                            <td><b>Is Gateway: </b>{{ device.is_gateway }}</td>
+                            <td>
+                              <b>Gateway: </b>{{ device.gateway }}                                                         
+                            </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td><b>IPv4: </b>{{ device.ipv4_address }}</td>
                             <td><b>Device Parent: </b>{{ device.device_parent }}</td>
                             <td><b>Create At: </b>{{ device.created_at | date:'medium'}}</td>
                             <td><b>Update At: </b>{{ device.update_at | date:'medium'}}</td>
@@ -155,7 +155,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let property of device.properties_list">
+                      <tr *ngFor="let property of device.properties">
                         <td>{{ property.name }}</td>
                         <td>{{ property.value }}</td>
                         <td>{{ property.description }}</td>
@@ -186,7 +186,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let resource of device.resources_list">
+                      <tr *ngFor="let resource of device.resources">
                         <td>{{ resource.tag }}</td>
                         <td>{{ resource.name }}</td>
                         <td>{{ resource.resource_type }}</td>

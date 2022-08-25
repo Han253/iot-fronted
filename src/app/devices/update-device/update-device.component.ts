@@ -18,10 +18,9 @@ export class UpdateDeviceComponent implements OnInit {
   constructor(private fbGenerator: FormBuilder, private DispositivoInyectado: DeviceService, private route: Router) { }
 
   ngOnInit(): void {
-    this.deviceForm = this.fbGenerator.group({
-      tag:['',Validators.required],
+    this.deviceForm = this.fbGenerator.group({      
       name:['',Validators.required],
-      is_gateway:[false],
+      gateway:[false],
       ipv4_address:[''],
       device_parent:[0],
       description:['']
@@ -29,10 +28,8 @@ export class UpdateDeviceComponent implements OnInit {
 
     this.device = this.DispositivoInyectado.device;
     this.deviceForm.setValue({
-      tag: this.device.tag,
       name: this.device.name,
-      is_gateway: this.device.is_gateway,
-      ipv4_address: this.device.ipv4_address,
+      gateway: this.device.gateway,
       device_parent: this.device.device_parent,
       description: this.device.description
     })

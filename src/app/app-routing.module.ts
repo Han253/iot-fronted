@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoriesComponent } from './categories/categories.component';
 import { AddDeviceComponent } from './devices/add-device/add-device.component';
 import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
 import { DevicesComponent } from './devices/devices.component';
@@ -13,11 +14,14 @@ const routes: Routes = [
     path: '', component:PrincipalComponent
   },
   {
+    path: 'categories', component:CategoriesComponent,
+  },
+  {
     path: 'devices', component:DevicesComponent, children: [
       {path:'', component:ListDeviceComponent},
       {path:'new', component:AddDeviceComponent},
-      {path:'detail/:tag',component:DeviceDetailComponent},
-      {path:'update/:tag',component:UpdateDeviceComponent}
+      {path:'detail/:id',component:DeviceDetailComponent},
+      {path:'update/:id',component:UpdateDeviceComponent}
     ]
   },
   {

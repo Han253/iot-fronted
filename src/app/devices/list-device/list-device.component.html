@@ -1,23 +1,25 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Create</th>
-        <th scope="col">Tag</th>
         <th scope="col">Name</th>
-        <th scope="col">Is Gateway</th>
+        <th scope="col">Type</th>
+        <th scope="col">Created time</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let device of devices">
-        <td>{{ device.created_at | date:'medium' }}</td>
-        <td>{{ device.tag}}</td>        
         <td>{{ device.name}}</td>
-        <td>{{ device.is_gateway }}</td>
+        <td>
+          <div *ngIf="device.gateway; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>Gateway</ng-template>
+          <ng-template #elseBlock>Device</ng-template>
+        </td>
+        <td>{{ device.created_at | date:'medium' }}</td>
         <td>
             <a class="text-muted" (click)="passDevice(device)"><i class="fas fa-list-alt"></i></a>&nbsp;&nbsp;
             <a class="text-muted" (click)="update(device)"><i class="fas fa-redo-alt"></i></a>&nbsp;&nbsp;
-            <a class="text-danger" (click)="delete(device.tag)"><i class="fas fa-trash-alt"></i></a>
+            <a class="text-danger" (click)="delete(device.id)"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
     </tbody>

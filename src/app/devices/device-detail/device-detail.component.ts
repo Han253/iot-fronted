@@ -14,7 +14,7 @@ import { DeviceService } from 'src/app/services/device.service';
 export class DeviceDetailComponent implements OnInit {
 
   device:Device = new Device();
-  deviceTag:string;
+  deviceId:number;
   propertyForm: FormGroup;
   //To add and update properties
   property:Property = new Property();
@@ -45,8 +45,8 @@ export class DeviceDetailComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.deviceTag = this.RutaActiva.snapshot.params.tag;
-    this.DispositivoInyectado.getDevice(this.deviceTag).subscribe((deviceResponse)=>{
+    this.deviceId = this.RutaActiva.snapshot.params.id;
+    this.DispositivoInyectado.getDevice(this.deviceId).subscribe((deviceResponse)=>{
         this.device = deviceResponse;
         this.DispositivoInyectado.device = deviceResponse;
     });
@@ -75,14 +75,14 @@ export class DeviceDetailComponent implements OnInit {
     if(this.updateProp){
       this.property.id = this.updatePropId;
       this.DispositivoInyectado.updateProperty(this.property).subscribe((propertyRecived)=>{
-        var index = this.device.properties_list.indexOf(this.propertyBeforeUpdate,0);
-        this.device.properties_list[index] = this.property;
+        var index = this.device.properties.indexOf(this.propertyBeforeUpdate,0);
+        this.device.properties[index] = this.property;
       })
     } 
     else {
       this.DispositivoInyectado.addProperty(this.property).subscribe((propertyRecived)=>{
         this.propertyRecived = propertyRecived;
-        this.device.properties_list.push(this.propertyRecived);
+        this.device.properties.push(this.propertyRecived);
         this.propertyForm.reset();
       });
     };
@@ -107,9 +107,9 @@ export class DeviceDetailComponent implements OnInit {
 
   deleteProperty(property:Property){
     this.DispositivoInyectado.deleteProperty(property.id).subscribe((response)=>{
-      var index = this.device.properties_list.indexOf(property,0);
+      var index = this.device.properties.indexOf(property,0);
       if (index > -1){
-        this.device.properties_list.splice(index,1);
+        this.device.properties.splice(index,1);
       }      
     })
   }
@@ -123,15 +123,15 @@ export class DeviceDetailComponent implements OnInit {
     if(this.updateReso){
       this.resource.id = this.updateResoId;
       this.DispositivoInyectado.updateResource(this.resource).subscribe((resouceRecived)=>{
-        var index = this.device.resources_list.indexOf(this.resourceBeforeUpdate,0);
-        this.device.resources_list[index] = this.resource;
+        var index = this.device.resources.indexOf(this.resourceBeforeUpdate,0);
+        this.device.resources[index] = this.resource;
       })
 
     } else {    
       
       this.DispositivoInyectado.addResource(this.resource).subscribe((resourceRecived)=>{
         this.resourceRecived = resourceRecived;
-        this.device.resources_list.push(this.resourceRecived);
+        this.device.resources.push(this.resourceRecived);
         this.resourceForm.reset();
       });
     }
@@ -159,15 +159,15 @@ export class DeviceDetailComponent implements OnInit {
 
   deleteResource(resource:Resource){
     this.DispositivoInyectado.deleteResource(resource.id).subscribe((response)=>{
-      var index = this.device.resources_list.indexOf(resource,0);
+      var index = this.device.resources.indexOf(resource,0);
       if (index > -1){
-        this.device.resources_list.splice(index,1);        
+        this.device.resources.splice(index,1);        
       }
     });    
   }
 
   passResource(resource:Resource){
-    this.route.navigate(['/resource/'+this.device.tag+'/'+resource.tag])
+    this.route.navigate(['/resource/'+this.device.id+'/'+resource.tag])
   }
 
 }

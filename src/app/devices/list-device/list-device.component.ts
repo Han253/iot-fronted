@@ -22,16 +22,16 @@ export class ListDeviceComponent implements OnInit {
 
   passDevice(deviceRecived:Device){
     this.DispositivoInyectado.device = deviceRecived;
-    this.route.navigate(['/devices/detail/'+deviceRecived.tag])
+    this.route.navigate(['/devices/detail/'+deviceRecived.id])
   }
   
   update(device:Device){
     this.DispositivoInyectado.device = device;
-    this.route.navigate(['/devices/update/'+device.tag])
+    this.route.navigate(['/devices/update/'+device.id])
   }
 
-  delete(tag:string){
-    this.DispositivoInyectado.deleteDevice(tag).subscribe((response)=>{
+  delete(id:number){
+    this.DispositivoInyectado.deleteDevice(id).subscribe((response)=>{
       this.DispositivoInyectado.getDevices().subscribe((devicesResponse)=>{
         this.devices = devicesResponse;
       });
